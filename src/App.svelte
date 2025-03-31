@@ -33,8 +33,7 @@
     <div class="list">
       {#each sprints as sprint}
       <p style="margin-top: 6px;display:flex;align-items: center;gap:8px;">
-        <input disabled checked={!sprint.isHidden} type="checkbox" />
-        <label style="flex:1">{sprint.name}</label>
+        <span style="flex:1">{sprint.name}</span>
         <button on:click={onClickToggle(sprint.name)}>{sprint.isHidden? "show" : "hide"}</button>
       </p>
       {/each}
