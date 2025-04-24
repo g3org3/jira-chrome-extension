@@ -1,6 +1,7 @@
 <script lang="ts">
   import { collapseAll, getSprints, toggleSprint, hideAllSprints, expandAll } from './lib/jira'
-  let sprints = [{ name: 'Sprint', isHidden: true }, { name: '#demo#', isHidden: false }]
+  let sprints = [{ name: 'Sprint', isHidden: true }, { name: '#demo#', isHidden: false }];
+  let filterText = '';
   getSprints().then(result => {
     sprints = result
   })
@@ -29,11 +30,12 @@
       <button on:click={onClickHideAll}>Hide All</button>
       <button on:click={expandAll}>Expand All</button>
     </div>
-    <p style="margin-top: 12px; font-size: 1.5rem;">Sprints</p>
+    <input bind:value={filterText} placeholder="Filter sprints..." />
+    <span style="font-weight: bold; font-size: 23px;">Sprints</span>
     <div class="list">
-      {#each sprints as sprint}
+      {#each sprints.filter(sprint => sprint.name.toLowerCase().includes(filterText.toLowerCase())) as sprint}
       <p style="margin-top: 6px;display:flex;align-items: center;gap:8px;">
-        <span style="flex:1">{sprint.name}</span>
+        <span style={sprint.isHidden ? "flex:1": "flex:1;font-weight:bold"}>{sprint.name}</span>
         <button on:click={onClickToggle(sprint.name)}>{sprint.isHidden? "show" : "hide"}</button>
       </p>
       {/each}
@@ -113,5 +115,24 @@
     padding: 12px;
     flex: 1;
     overflow: auto;
+    gap: 14px;
+  }
+
+  input {
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 1;
+    height: 30px;
+    max-width: none;
+    padding: 5px 24px 5px 5px;
+    -moz-transition: width 100ms ease-in-out;
+    -ms-transition: width 100ms ease-in-out;
+    -webkit-transition: width 100ms ease-in-out;
+    transition: width 100ms ease-in-out;
   }
 </style>
