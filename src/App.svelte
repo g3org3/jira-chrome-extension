@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { collapseAll, getSprints, toggleSprint, hideAllSprints, expandAll } from './lib/jira'
+  import { test, collapseAll, executeCode, getSprints, toggleSprint, hideAllSprints, expandAll } from './lib/jira'
   let sprints = [{ name: 'Sprint', isHidden: true }, { name: '#demo#', isHidden: false }];
   let filterText = '';
   getSprints().then(result => {
