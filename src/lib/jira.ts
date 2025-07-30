@@ -19,6 +19,23 @@ export async function executeCode(func, args) {
   return result;
 }
 
+function _githubTransformJiraLink() {
+  var temp1 = document.querySelector(".js-issue-title");
+  var jira = "https://{}/browse";
+  if (temp1 && temp1.innerHTML.indexOf("<a") === -1) {
+    var rgx = /([A-Z]+-\d+)/;
+    var matches = temp1.innerText.match(rgx);
+    var token = matches[0];
+    if (!token) return;
+    var link = `<a target="_blank" href="${jira}/${token}">${token}</a>`;
+
+    temp1.innerHTML = temp1.innerHTML.replace(token, link);
+  }
+}
+export function githubTransformJiraLink() {
+  return executeCode(_githubTransformJiraLink);
+}
+
 function _getSprints() {
   const sprintsDom = Array.from(
     document.querySelectorAll(".ghx-backlog-container"),

@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { collapseAll, executeCode, getSprints, toggleSprint, hideAllSprints, expandAll } from './lib/jira'
+  import { collapseAll, executeCode, githubTransformJiraLink,  getSprints, toggleSprint, hideAllSprints, expandAll } from './lib/jira'
   let sprints = [{ name: 'Sprint', isHidden: true }, { name: '#demo#', isHidden: false }];
   let filterText = '';
+
+  githubTransformJiraLink()
+
   getSprints().then(result => {
     sprints = result
   })
