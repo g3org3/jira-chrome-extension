@@ -21,7 +21,7 @@ export async function executeCode(func, args) {
 
 function _githubTransformJiraLink() {
   var temp1 = document.querySelector(".js-issue-title");
-  var jira = "https://{}/browse";
+  var jira = "https://devopsjira.deutsche-boerse.com/browse";
   if (temp1 && temp1.innerHTML.indexOf("<a") === -1) {
     var rgx = /([A-Z]+-\d+)/;
     var matches = temp1.innerText.match(rgx);
